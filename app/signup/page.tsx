@@ -10,7 +10,7 @@ export default function Login({
   searchParams: { message: string };
 }) {
   const signUp = async (formData: FormData) => {
-    'use server';
+    'use server'; // Next.js "Server Action"
 
     const origin = headers().get('origin');
     const email = formData.get('email') as string;
@@ -32,7 +32,7 @@ export default function Login({
     });
 
     if (error) {
-      console.log('ERROR', error);
+      console.log('ERROR', error.message);
       return redirect('/login?message=Could not authenticate user');
     }
 

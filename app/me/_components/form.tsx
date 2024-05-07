@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/client';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Form({ user }) {
+export default function Form(props: { user: any }) {
   const [updatedDisplayName, setUpdatedDisplayName] = useState('');
   const supabase = createClient();
   const router = useRouter();
@@ -40,7 +40,7 @@ export default function Form({ user }) {
           type="text"
           className="block w-full px-4 py-2 mt-1 border rounded-md"
           value={updatedDisplayName}
-          placeholder={user.user_metadata.display_name}
+          placeholder={props.user.user_metadata.display_name}
           onChange={e => setUpdatedDisplayName(e.target.value)}
         />
       </label>

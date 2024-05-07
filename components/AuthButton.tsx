@@ -46,6 +46,7 @@ export default async function AuthButton() {
           Logout
         </button>
       </form>
+      <pre className="text-xs">{user.id}</pre>
     </div>
   ) : (
     <div className="flex gap-2">
