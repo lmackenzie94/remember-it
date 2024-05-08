@@ -1,6 +1,5 @@
 import Question from '@/components/Question';
 import { createClient } from '@/utils/supabase/server';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 export default async function Page() {
@@ -14,21 +13,25 @@ export default async function Page() {
     return redirect('/login');
   }
 
-  const { data: questions } = (await supabase.from('questions').select()) as {
-    data: any[];
-  };
+  console.log('QUESTIONS PAGE...');
+  const { data: questions } = (await supabase
+    .from('questions')
+    .select()) as any;
 
   return (
     <div>
-      <h2 className="mb-4 text-xl font-bold">Questions</h2>
+      <h2 className="mb-4 text-4xl font-bold">Questions</h2>
 
       {questions.length === 0 && <p>No questions found.</p>}
-      {questions.map((question: any) => {
-        const canEdit = question.user_id === user.id;
-        return (
-          <Question key={question.id} question={question} canEdit={canEdit} />
-        );
-      })}
+
+      <div className="grid grid-cols-3 gap-4">
+        {questions.map((question: any) => {
+          const canEdit = question.user_id === user.id;
+          return (
+            <Question key={question.id} question={question} canEdit={canEdit} />
+          );
+        })}
+      </div>
     </div>
   );
 }

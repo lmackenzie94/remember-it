@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <h2 className="mb-4 text-xl font-bold">Edit Question</h2>
+      <h2 className="mb-4 text-4xl font-bold">Edit Question</h2>
 
       <Question question={question} canEdit={true} />
 

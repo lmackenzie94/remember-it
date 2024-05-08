@@ -1,6 +1,6 @@
 import Question from '@/components/Question';
 import { createClient } from '@/utils/supabase/server';
-import { revalidatePath, revalidateTag } from 'next/cache';
+// import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export default async function Page() {
@@ -42,12 +42,12 @@ export default async function Page() {
     console.log('Question created', data);
 
     // redirect to the question page
-    // redirect(`/questions`);
+    redirect(`/questions`);
   }
 
   return (
     <div>
-      <h2 className="mb-4 text-xl font-bold">New Question</h2>
+      <h2 className="mb-4 text-4xl font-bold">New Question</h2>
 
       <form action={createQuestion}>
         <label className="block mb-4 text-sm text-gray-700">

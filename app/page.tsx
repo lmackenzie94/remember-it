@@ -28,13 +28,15 @@ export default async function Index() {
     <div className="">
       <h2 className="mb-4 text-4xl font-bold">Question Feed</h2>
 
-      {questions?.map((question: any) => (
-        <Question
-          key={question.id}
-          question={question}
-          canEdit={question.user_id === user.id}
-        />
-      ))}
+      <div className="grid grid-cols-3 gap-4">
+        {questions?.map((question: any) => (
+          <Question
+            key={question.id}
+            question={question}
+            canEdit={question.user_id === user.id}
+          />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
-import { revalidateTag } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import Link from 'next/link';
 
 export default async function Question({
@@ -26,7 +26,8 @@ export default async function Question({
     const { data, error } = await supabase
       .from('questions')
       .delete()
-      .eq('id', question.id);
+      .eq('id', question.id)
+      .select();
 
     if (error || !data) {
       console.error('Error deleting question', error);

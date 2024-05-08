@@ -33,9 +33,13 @@ export default async function AuthButton() {
   const displayName = user?.user_metadata.display_name;
 
   return user ? (
-    <div className="flex items-center gap-4">
+    <div className="relative flex items-center gap-4">
       <Link href="/questions" className="text-blue-500">
         Questions
+      </Link>
+
+      <Link href="/questions/new" className="text-green-500">
+        New Question
       </Link>
 
       <Link href="/me" className="text-blue-500">
@@ -46,7 +50,9 @@ export default async function AuthButton() {
           Logout
         </button>
       </form>
-      <pre className="text-xs">{user.id}</pre>
+      <pre className="absolute text-xs top-[120%] right-2">
+        User ID: {user.id}
+      </pre>
     </div>
   ) : (
     <div className="flex gap-2">
