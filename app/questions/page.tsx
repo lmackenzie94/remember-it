@@ -1,38 +1,20 @@
-import Question from '@/components/Question';
-import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
+import Question from '@/src/components/Question';
+import { H2 } from '@/src/components/typography';
+import { getMyQuestions } from '@/utils/supabase/server/queries';
 
 export default async function Page() {
-  const supabase = createClient();
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect('/login');
-  }
-
-  console.log('QUESTIONS PAGE...');
-  const { data: questions, error } = (await supabase
-    .from('questions')
-    .select()) as any;
-
-  if (error) {
-    throw new Error(error.message);
-  }
+  const questions = await getMyQuestions();
 
   return (
     <div>
-      <h2 className="mb-4 text-4xl font-bold">Questions</h2>
+      <H2>My Questions</H2>
 
       {!questions || (questions.length === 0 && <p>No questions found.</p>)}
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-8">
         {questions?.map((question: any) => {
-          const canEdit = question.user_id === user.id;
           return (
-            <Question key={question.id} question={question} canEdit={canEdit} />
+            <Question key={question.id} question={question} canEdit={true} />
           );
         })}
       </div>

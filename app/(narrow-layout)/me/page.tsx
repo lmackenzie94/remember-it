@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { createClient } from '@/utils/supabase/server';
-import Form from './_components/form';
+import ProfileForm from './_components/ProfileForm';
+import { H2 } from '@/src/components/typography';
 
 export default async function Me() {
   const supabase = createClient();
@@ -12,10 +13,8 @@ export default async function Me() {
 
   return (
     <div>
-      <h2 className="mb-4 text-xl font-bold">
-        Hello, {data.user.user_metadata.display_name}
-      </h2>
-      <Form user={data.user} />
+      <H2>Update Your Profile</H2>
+      <ProfileForm user={data.user} />
     </div>
   );
 }

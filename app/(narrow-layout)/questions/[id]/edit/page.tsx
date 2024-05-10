@@ -1,7 +1,9 @@
-import Question from '@/components/Question';
+import Question from '@/src/components/Question';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
+import QuestionForm from '../../../_components/QuestionForm';
+import { H2 } from '@/src/components/typography';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const supabase = createClient();
@@ -42,8 +44,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       .eq('id', params.id)
       .select();
 
-    if (error) {
+    if (error || !data) {
       console.error('Error updating question', error);
+      throw new Error(error.message);
     }
 
     console.log('Question updated', data);
@@ -55,46 +58,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>
-      <h2 className="mb-4 text-4xl font-bold">Edit Question</h2>
+      <H2>Update Question</H2>
 
-      <Question question={question} canEdit={true} />
-
-      <form action={updateQuestion}>
-        <label className="block mb-4 text-sm text-gray-700">
-          Question
-          <input
-            name="question"
-            defaultValue={question.question}
-            className="block w-full px-4 py-2 mt-1 border rounded-md"
-          />
-        </label>
-
-        <label className="block mb-4 text-sm text-gray-700">
-          Answer
-          <input
-            name="answer"
-            defaultValue={question.answer}
-            className="block w-full px-4 py-2 mt-1 border rounded-md"
-          />
-        </label>
-
-        <label className="block mb-4 text-sm text-gray-700">
-          Private
-          <input
-            type="checkbox"
-            name="private"
-            defaultChecked={question.private}
-            className="block w-full px-4 py-2 mt-1 border rounded-md"
-          />
-        </label>
-
-        <button
-          type="submit"
-          className="px-4 py-2 no-underline rounded-md bg-btn-background hover:bg-btn-background-hover"
-        >
-          Update
-        </button>
-      </form>
+      <QuestionForm
+        action={updateQuestion}
+        question={question}
+        buttonText="Update"
+      />
     </div>
   );
 }

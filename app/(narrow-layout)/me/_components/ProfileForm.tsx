@@ -4,7 +4,7 @@ import { createClient } from '@/utils/supabase/client';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-export default function Form(props: { user: any }) {
+export default function ProfileForm(props: { user: any }) {
   const [updatedDisplayName, setUpdatedDisplayName] = useState('');
   const supabase = createClient();
   const router = useRouter();
@@ -33,8 +33,8 @@ export default function Form(props: { user: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label className="block mb-4 text-sm text-gray-700">
+    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-md">
+      <label className="block mb-4 text-sm ">
         Update your display name
         <input
           type="text"
@@ -46,7 +46,7 @@ export default function Form(props: { user: any }) {
       </label>
       <button
         type="submit"
-        className="px-4 py-2 no-underline rounded-md bg-btn-background hover:bg-btn-background-hover"
+        className="w-full py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600"
       >
         Save
       </button>

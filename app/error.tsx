@@ -1,10 +1,13 @@
 'use client';
+
+import { H2 } from '@/src/components/typography';
+
 export default function Error({ error }: { error: Error }) {
   console.error(error);
   return (
-    <>
-      <h2>Something went wrong, man</h2>
-      <p>{error.message}</p>
-    </>
+    <div className="text-center">
+      <H2>Something went wrong...</H2>
+      <p className="text-lg text-red-800">{error.message}</p>
+    </div>
   );
 }

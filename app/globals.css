@@ -22,7 +22,17 @@
 
 @layer base {
   * {
-    @apply border-foreground/20;
+    @apply accent-pink-300 outline-pink-300;
+  }
+  body {
+    @apply text-gray-800;
+  }
+  label {
+    @apply font-semibold;
+  }
+  input,
+  textarea {
+    @apply font-normal text-gray-800;
   }
 }
 

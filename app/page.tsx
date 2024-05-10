@@ -1,7 +1,8 @@
-import Footer from '@/components/Footer';
+import Footer from '@/src/components/Footer';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import Question from '@/components/Question';
+import Question from '@/src/components/Question';
+import { H2 } from '@/src/components/typography';
 
 export default async function Index() {
   const supabase = createClient();
@@ -26,7 +27,7 @@ export default async function Index() {
 
   return (
     <div className="">
-      <h2 className="mb-4 text-4xl font-bold">Question Feed</h2>
+      <H2>Question Feed</H2>
 
       <div className="grid grid-cols-3 gap-4">
         {questions?.map((question: any) => (
