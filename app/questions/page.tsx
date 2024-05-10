@@ -14,18 +14,22 @@ export default async function Page() {
   }
 
   console.log('QUESTIONS PAGE...');
-  const { data: questions } = (await supabase
+  const { data: questions, error } = (await supabase
     .from('questions')
     .select()) as any;
+
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return (
     <div>
       <h2 className="mb-4 text-4xl font-bold">Questions</h2>
 
-      {questions.length === 0 && <p>No questions found.</p>}
+      {!questions || (questions.length === 0 && <p>No questions found.</p>)}
 
       <div className="grid grid-cols-3 gap-4">
-        {questions.map((question: any) => {
+        {questions?.map((question: any) => {
           const canEdit = question.user_id === user.id;
           return (
             <Question key={question.id} question={question} canEdit={canEdit} />
