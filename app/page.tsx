@@ -1,41 +1,46 @@
 import Footer from '@/src/components/Footer';
 import { createClient } from '@/utils/supabase/server';
-import { redirect } from 'next/navigation';
 import Question from '@/src/components/Question';
 import { H2 } from '@/src/components/typography';
 
 export default async function Index() {
   const supabase = createClient();
+
   const {
     data: { user },
     error
   } = await supabase.auth.getUser();
 
-  if (error || !user) {
-    redirect('/login');
+  // if (error) {
+  //   throw new Error(error.message);
+  // }
+
+  const baseQuery = supabase.from('questions').select();
+
+  // if there's a user, get public questions + their own private questions
+  if (user) {
+    baseQuery.or(`private.eq.false, user_id.eq.${user.id}`);
+
+    // otherwise, only get public questions
+  } else {
+    baseQuery.eq('private', false);
   }
 
-  /* get all questions that are either 1) public or 2) owned by the current user */
-  const { data: questions, error: questionsError } = await supabase
-    .from('questions')
-    .select()
-    .or(`private.eq.false, user_id.eq.${user.id}`);
+  const { data: questions, error: questionsError } = await baseQuery
+    .order('created_at', { ascending: false })
+    .limit(6);
 
   if (questionsError) {
-    console.error('Error getting questions', questionsError);
+    throw new Error(questionsError.message);
   }
 
   return (
     <div className="">
-      <H2>Question Feed</H2>
+      <H2>Recent Questions</H2>
 
       <div className="grid grid-cols-3 gap-4">
         {questions?.map((question: any) => (
-          <Question
-            key={question.id}
-            question={question}
-            canEdit={question.user_id === user.id}
-          />
+          <Question key={question.id} question={question} canEdit={false} />
         ))}
       </div>
     </div>

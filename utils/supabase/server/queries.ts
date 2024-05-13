@@ -24,5 +24,5 @@ export const getMyQuestions = async () => {
 export const signOut = async () => {
   const supabase = createClient();
   await supabase.auth.signOut();
-  return redirect('/login');
+  return redirect('/');
 };
