@@ -1,4 +1,5 @@
 import Question from '@/src/components/Question';
+import { H2 } from '@/src/components/typography';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -25,8 +26,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div>
-      <Question question={question} canEdit={true} />
-    </div>
+    <article className="max-w-[60ch] mx-auto">
+      <H2>{question.question}</H2>
+      <p>{question.answer}</p>
+    </article>
   );
 }

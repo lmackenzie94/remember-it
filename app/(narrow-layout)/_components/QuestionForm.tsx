@@ -1,3 +1,5 @@
+// import MDEditor from '@/src/components/MarkdownEditor';
+
 export default function Form({
   action,
   buttonText,
@@ -12,7 +14,7 @@ export default function Form({
   };
 }) {
   return (
-    <form action={action} className="p-6 bg-white rounded-md">
+    <form action={action} className="p-6 bg-white rounded-2xl">
       <label className="block mb-4 text-sm ">
         Question
         <input
@@ -22,7 +24,6 @@ export default function Form({
         />
       </label>
 
-      {/* TODO: make this a markdown editor */}
       <label className="block mb-4 text-sm ">
         Answer
         <textarea
@@ -32,6 +33,9 @@ export default function Form({
           className="block w-full px-4 py-2 mt-1 border rounded-md"
         />
       </label>
+
+      {/* TODO: I think I have to make this a client component to use MDEditor, that way I can save the value to state */}
+      {/* <MDEditor value={''} height="200px" /> */}
 
       <label className="flex flex-col items-start mb-4 text-sm ">
         Private?

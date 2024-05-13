@@ -20,6 +20,20 @@ module.exports = {
           background: 'hsl(var(--btn-background))',
           'background-hover': 'hsl(var(--btn-background-hover))'
         }
+      },
+      animation: {
+        'fade-in': 'fade-in 0.2s ease-out forwards',
+        'fade-up-in': 'fade-up-in 0.2s ease-out forwards'
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 }
+        },
+        'fade-up-in': {
+          '0%': { opacity: 0, transform: 'translateY(20px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' }
+        }
       }
     }
   },

@@ -41,38 +41,34 @@ export default async function Question({
   };
 
   return (
-    <article
-      key={question.id}
-      className="relative flex flex-col justify-between p-4 bg-white border rounded-md shadow-lg shadow-slate-200 min-h-48"
-    >
-      <div>
-        <h3 className="mb-2 text-lg font-semibold">{question.question}</h3>
-        <p>{question.answer}</p>
-        {question.private && (
-          <span className="absolute px-2 py-1 text-xs font-semibold text-white rounded-full bg-violet-800 -top-2 -right-2">
-            <p>Private</p>
-          </span>
-        )}
-      </div>
-
-      {canEdit && (
-        <div className="flex items-center justify-end gap-4">
-          <Link
-            href={`/questions/${question.id}/edit`}
-            className="text-blue-500"
-          >
-            Edit
-          </Link>
-          <form>
-            <button
-              formAction={deleteQuestion}
-              className="px-4 py-2 text-white no-underline bg-red-500 rounded-md hover:bg-red-600"
-            >
-              Delete
-            </button>
-          </form>
+    <Link href={`/questions/${question.id}`}>
+      <article className="relative flex flex-col justify-between p-4 bg-white border rounded-2xl shadow-lg shadow-gray-200 min-h-56 hover:shadow-none hover:scale-[0.99] transition-all">
+        <div className="flex items-center justify-center flex-1">
+          <h3 className="mb-2 text-2xl font-black">{question.question}</h3>
+          {question.private && (
+            <span className="absolute px-2 py-1 text-xs font-semibold text-white rounded-full bg-violet-800 -top-2 -right-2">
+              <p>Private</p>
+            </span>
+          )}
         </div>
-      )}
-    </article>
+
+        {/*! Can't have nested links */}
+
+        {/* {canEdit && (
+          <div className="flex items-center justify-end gap-4">
+            <form>
+              <button
+                formAction={deleteQuestion}
+                className="px-4 py-2 text-white no-underline bg-red-500 rounded-md hover:bg-red-600"
+              >
+                Delete
+              </button>
+
+              <Link href={`/questions/${question.id}/edit`}>Edit</Link>
+            </form>
+          </div>
+        )} */}
+      </article>
+    </Link>
   );
 }

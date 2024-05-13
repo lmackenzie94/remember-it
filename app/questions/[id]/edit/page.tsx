@@ -2,8 +2,9 @@ import Question from '@/src/components/Question';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
-import QuestionForm from '../../../_components/QuestionForm';
+import QuestionForm from '../../../(narrow-layout)/_components/QuestionForm';
 import { H2 } from '@/src/components/typography';
+import NarrowContainer from '@/src/components/NarrowContainer';
 
 export default async function Page({ params }: { params: { id: string } }) {
   const supabase = createClient();
@@ -57,7 +58,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div>
+    <NarrowContainer>
       <H2>Update Question</H2>
 
       <QuestionForm
@@ -65,6 +66,6 @@ export default async function Page({ params }: { params: { id: string } }) {
         question={question}
         buttonText="Update"
       />
-    </div>
+    </NarrowContainer>
   );
 }

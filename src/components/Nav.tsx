@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 
 const NavLinks = [
   { href: '/questions', label: 'All' },
-  { href: '/questions/new', label: 'New' }
+  { href: '/new-question', label: 'New' }
 ];
 
 const Avatar = (props: { displayName: string }) => {
@@ -29,6 +29,7 @@ export default function Nav({ user }: { user: any }) {
     <nav className="flex items-center gap-8">
       {NavLinks.map(({ href, label }) => {
         const isActive = pathname === href;
+
         return (
           <Link
             key={href}

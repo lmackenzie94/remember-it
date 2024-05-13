@@ -33,7 +33,7 @@ export default function ProfileForm(props: { user: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-md">
+    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-2xl">
       <label className="block mb-4 text-sm ">
         Update your display name
         <input
