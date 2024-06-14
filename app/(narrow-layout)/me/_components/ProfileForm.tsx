@@ -1,12 +1,12 @@
 'use client';
 
-import { createClient } from '@/utils/supabase/client';
+import { createBrowserClient } from '@/utils/supabase/client';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function ProfileForm(props: { user: any }) {
   const [updatedDisplayName, setUpdatedDisplayName] = useState('');
-  const supabase = createClient();
+  const supabase = createBrowserClient();
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {

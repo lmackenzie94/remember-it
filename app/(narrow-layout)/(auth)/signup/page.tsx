@@ -1,5 +1,5 @@
 import { headers } from 'next/headers';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { SubmitButton } from '../_components/SubmitButton';
 import { H2 } from '@/src/components/typography';
@@ -16,7 +16,7 @@ export default function Login({
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     const displayName = formData.get('display_name') as string;
-    const supabase = createClient();
+    const supabase = createServerClient();
 
     const { data, error } = await supabase.auth.signUp({
       email,

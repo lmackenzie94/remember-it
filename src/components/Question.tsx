@@ -1,4 +1,4 @@
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import Link from 'next/link';
 
@@ -10,7 +10,7 @@ export default async function Question({
   canEdit: boolean;
 }) {
   // TODO: how to get the creator of the question? Can't do this because only admins can get user by id
-  const supabase = createClient();
+  const supabase = createServerClient();
   // const creator = await supabase.auth.admin.getUserById(question.user_id);
 
   const {
@@ -21,8 +21,8 @@ export default async function Question({
   const deleteQuestion = async () => {
     'use server';
 
-    // had to recall createClient here otherwise it was throwing an error
-    const supabase = createClient();
+    // had to recall createServerClient here otherwise it was throwing an error
+    const supabase = createServerClient();
     const { data, error } = await supabase
       .from('questions')
       .delete()

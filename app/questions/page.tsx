@@ -26,12 +26,12 @@ export default async function Page() {
 
 // 'use client'
 
-// import { createClient } from '@/utils/supabase/client'
+// import { createServerClient } from '@/utils/supabase/client'
 // import { useEffect, useState } from 'react'
 
 // export default function Page() {
 //   const [notes, setNotes] = useState<any[] | null>(null)
-//   const supabase = createClient()
+//   const supabase = createBrowserClient()
 
 //   useEffect(() => {
 //     const getData = async () => {

@@ -2,7 +2,7 @@ import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,7 +19,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const {
     data: { user }

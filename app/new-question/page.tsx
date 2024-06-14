@@ -3,7 +3,7 @@
 //! Not sure if there's a way to exclude certain routes from being intercepted...
 
 import Question from '@/src/components/Question';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 // import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import QuestionForm from '../(narrow-layout)/_components/QuestionForm';
@@ -11,7 +11,7 @@ import { H2 } from '@/src/components/typography';
 import NarrowContainer from '@/src/components/NarrowContainer';
 
 export default async function Page() {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
@@ -21,8 +21,8 @@ export default async function Page() {
   async function createQuestion(formData: FormData) {
     'use server'; // Next.js "Server Action"
 
-    // had to recall createClient here otherwise it was throwing an error
-    const supabase = createClient();
+    // had to recall createServerClient here otherwise it was throwing an error
+    const supabase = createServerClient();
 
     const {
       data: { user }

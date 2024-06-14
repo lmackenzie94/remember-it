@@ -1,10 +1,10 @@
 import Footer from '@/src/components/Footer';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import Question from '@/src/components/Question';
 import { H2 } from '@/src/components/typography';
 
 export default async function Index() {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const {
     data: { user },

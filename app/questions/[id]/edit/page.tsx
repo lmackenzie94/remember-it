@@ -1,5 +1,5 @@
 import Question from '@/src/components/Question';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import QuestionForm from '../../../(narrow-layout)/_components/QuestionForm';
@@ -7,7 +7,7 @@ import { H2 } from '@/src/components/typography';
 import NarrowContainer from '@/src/components/NarrowContainer';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
@@ -31,8 +31,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   async function updateQuestion(formData: FormData) {
     'use server'; // Next.js "Server Action"
 
-    // had to recall createClient here otherwise it was throwing an error
-    const supabase = createClient();
+    // had to recall createServerClient here otherwise it was throwing an error
+    const supabase = createServerClient();
     const isPrivate = formData.has('private');
 
     const { data, error } = await supabase

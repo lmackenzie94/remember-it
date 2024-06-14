@@ -1,10 +1,10 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import ProfileForm from './_components/ProfileForm';
 import { H2 } from '@/src/components/typography';
 
 export default async function Me() {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {

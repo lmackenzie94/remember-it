@@ -1,11 +1,11 @@
 import Question from '@/src/components/Question';
 import { H2 } from '@/src/components/typography';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {

@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '../server';
+import { createServerClient } from '../server';
 
 export const getMyQuestions = async () => {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
@@ -22,7 +22,7 @@ export const getMyQuestions = async () => {
 };
 
 export const signOut = async () => {
-  const supabase = createClient();
+  const supabase = createServerClient();
   await supabase.auth.signOut();
   return redirect('/');
 };

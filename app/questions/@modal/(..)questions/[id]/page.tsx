@@ -2,7 +2,7 @@
 
 import Modal from '@/src/components/Modal';
 import { H2 } from '@/src/components/typography';
-import { createClient } from '@/utils/supabase/server';
+import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
 //* This page is only displayed when navigating to a Question page, not when you go directly to the URL / reload the page
@@ -11,7 +11,7 @@ export default async function InterceptedQuestionPage({
 }: {
   params: { id: string };
 }) {
-  const supabase = createClient();
+  const supabase = createServerClient();
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
