@@ -31,7 +31,7 @@ export default function Login({
   return (
     <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 bg-white rounded-2xl sm:max-w-md">
       <H2>Sign In</H2>
-      <form className="flex flex-col justify-center flex-1 w-full gap-2 animate-in text-foreground">
+      <form className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in text-foreground">
         <label className="text-md" htmlFor="email">
           Email
         </label>
