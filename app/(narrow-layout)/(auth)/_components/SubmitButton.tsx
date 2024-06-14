@@ -20,6 +20,7 @@ export function SubmitButton({
   const isPending = pending && action === props.formAction;
 
   return (
+    // @ts-ignore - TODO: fix this ({...props} is causing an error)
     <Button variant={variant} type="submit" aria-disabled={pending} {...props}>
       {isPending ? pendingText : children}
     </Button>
