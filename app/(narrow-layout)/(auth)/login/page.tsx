@@ -29,9 +29,9 @@ export default function Login({
   };
 
   return (
-    <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 bg-white rounded-2xl sm:max-w-md">
+    <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 rounded-2xl">
       <H2>Sign In</H2>
-      <form className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in text-foreground">
+      <form className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in">
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -52,8 +52,8 @@ export default function Login({
         />
 
         <SubmitButton
+          variant="green"
           formAction={signIn}
-          className="py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600"
           pendingText="Signing In..."
         >
           Sign In

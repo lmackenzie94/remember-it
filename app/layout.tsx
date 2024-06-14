@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import { createServerClient } from '@/utils/supabase/server';
+import { ThemeProvider } from '@/src/components/ThemeProvider';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -26,11 +27,19 @@ export default async function RootLayout({
   } = await supabase.auth.getUser();
 
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="flex flex-col items-center min-h-screen bg-background text-foreground">
-        <Header user={user} />
-        <main className="container flex-1">{children}</main>
-        <Footer user={user} />
+    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+      <body className="flex flex-col items-center min-h-screen">
+        {/* ThemProvider only works in the body */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header user={user} />
+          <main className="container flex-1">{children}</main>
+          <Footer user={user} />
+        </ThemeProvider>
       </body>
     </html>
   );

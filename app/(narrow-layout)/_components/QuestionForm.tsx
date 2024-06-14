@@ -1,5 +1,8 @@
 // import MDEditor from '@/src/components/MarkdownEditor';
 
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/src/components/Switch';
+
 export default function Form({
   action,
   buttonText,
@@ -14,7 +17,7 @@ export default function Form({
   };
 }) {
   return (
-    <form action={action} className="p-6 bg-white rounded-2xl">
+    <form action={action} className="p-6 rounded-2xl">
       <label className="block mb-4 text-sm ">
         Question
         <input
@@ -37,22 +40,23 @@ export default function Form({
       {/* TODO: I think I have to make this a client component to use MDEditor, that way I can save the value to state */}
       {/* <MDEditor value={''} height="200px" /> */}
 
-      <label className="flex flex-col items-start mb-4 text-sm ">
+      {/* TODO: remove this when Switch works */}
+      <label className="flex items-center text-sm gap-2">
         Private?
         <input
           type="checkbox"
           name="private"
           defaultChecked={question?.private}
-          className="block w-4 h-4 px-4 py-2 mt-2 border rounded-md"
+          className="block w-4 h-4 px-4 py-2 border rounded-md"
         />
       </label>
 
-      <button
-        type="submit"
-        className="w-full py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600"
-      >
+      {/* TODO: Switch doesn't work - doesn't get included in the FormData  */}
+      {/* <Switch id="private" label="Private?" /> */}
+
+      <Button variant="green" type="submit" className="w-full mt-6">
         {buttonText}
-      </button>
+      </Button>
     </form>
   );
 }

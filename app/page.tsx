@@ -11,10 +11,6 @@ export default async function Index() {
     error
   } = await supabase.auth.getUser();
 
-  // if (error) {
-  //   throw new Error(error.message);
-  // }
-
   const baseQuery = supabase.from('questions').select();
 
   // if there's a user, get public questions + their own private questions
@@ -35,14 +31,14 @@ export default async function Index() {
   }
 
   return (
-    <div className="">
-      <H2>Recent Questions</H2>
+    <>
+      <H2>Question Feed</H2>
 
       <div className="grid grid-cols-3 gap-4">
         {questions?.map((question: any) => (
           <Question key={question.id} question={question} canEdit={false} />
         ))}
       </div>
-    </div>
+    </>
   );
 }

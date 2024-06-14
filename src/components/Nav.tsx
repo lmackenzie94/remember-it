@@ -15,7 +15,7 @@ const Avatar = (props: { displayName: string }) => {
     .join('');
 
   return (
-    <div className="flex items-center justify-center text-sm font-bold text-white bg-blue-500 rounded-full w-9 h-9">
+    <div className="flex items-center justify-center text-sm font-bold text-accent-foreground bg-accent rounded-full w-9 h-9">
       {initials}
     </div>
   );
@@ -31,13 +31,7 @@ export default function Nav({ user }: { user: any }) {
         const isActive = pathname === href;
 
         return (
-          <Link
-            key={href}
-            href={href}
-            className={`hover:text-pink-300 ${
-              isActive ? 'text-pink-300 font-bold' : 'text-white'
-            }`}
-          >
+          <Link key={href} href={href} className={isActive ? 'font-bold' : ''}>
             {label}
           </Link>
         );

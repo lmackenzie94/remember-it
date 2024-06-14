@@ -31,6 +31,8 @@ export default async function Page({ params }: { params: { id: string } }) {
   async function updateQuestion(formData: FormData) {
     'use server'; // Next.js "Server Action"
 
+    console.log('formData', formData);
+
     // had to recall createServerClient here otherwise it was throwing an error
     const supabase = createServerClient();
     const isPrivate = formData.has('private');
@@ -50,11 +52,13 @@ export default async function Page({ params }: { params: { id: string } }) {
       throw new Error(error.message);
     }
 
-    console.log('Question updated', data);
+    // console.log('Question updated', data);
 
     // TODO: not sure which is better..?
     // revalidatePath(`/questions/${params.id}/edit`);
     revalidateTag('questions');
+
+    // TODO: show toast message confirming update
   }
 
   return (

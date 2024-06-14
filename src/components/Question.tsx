@@ -1,6 +1,9 @@
 import { createServerClient } from '@/utils/supabase/server';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 export default async function Question({
   question,
@@ -10,13 +13,13 @@ export default async function Question({
   canEdit: boolean;
 }) {
   // TODO: how to get the creator of the question? Can't do this because only admins can get user by id
-  const supabase = createServerClient();
+  // const supabase = createServerClient();
   // const creator = await supabase.auth.admin.getUserById(question.user_id);
 
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-  const creatorId = question.user_id;
+  // const {
+  //   data: { user }
+  // } = await supabase.auth.getUser();
+  // const creatorId = question.user_id;
 
   const deleteQuestion = async () => {
     'use server';
@@ -41,34 +44,37 @@ export default async function Question({
   };
 
   return (
-    <Link href={`/questions/${question.id}`}>
-      <article className="relative flex flex-col justify-between p-4 bg-white border rounded-2xl shadow-lg shadow-gray-200 min-h-56 hover:shadow-none hover:scale-[0.99] transition-all">
-        <div className="flex items-center justify-center flex-1">
-          <h3 className="mb-2 text-2xl font-black">{question.question}</h3>
-          {question.private && (
-            <span className="absolute px-2 py-1 text-xs font-semibold text-white rounded-full bg-violet-800 -top-2 -right-2">
-              <p>Private</p>
-            </span>
-          )}
-        </div>
+    <Card className="relative">
+      {question.private && (
+        <Badge variant="green" className="absolute -top-2 -right-2">
+          Private
+        </Badge>
+      )}
+      <CardHeader className="mb-10 mt-3">
+        <CardTitle>{question.question}</CardTitle>
+      </CardHeader>
 
-        {/*! Can't have nested links */}
-
-        {/* {canEdit && (
-          <div className="flex items-center justify-end gap-4">
-            <form>
-              <button
-                formAction={deleteQuestion}
-                className="px-4 py-2 text-white no-underline bg-red-500 rounded-md hover:bg-red-600"
-              >
-                Delete
-              </button>
-
-              <Link href={`/questions/${question.id}/edit`}>Edit</Link>
-            </form>
-          </div>
-        )} */}
-      </article>
-    </Link>
+      {canEdit && (
+        <CardFooter className="flex items-center justify-end gap-2">
+          <Link
+            href={`/questions/${question.id}`}
+            className={buttonVariants({ variant: 'secondary', size: 'xs' })}
+          >
+            View
+          </Link>
+          <Link
+            href={`/questions/${question.id}/edit`}
+            className={buttonVariants({ size: 'xs' })}
+          >
+            Edit
+          </Link>
+          <form>
+            <Button variant="destructive" formAction={deleteQuestion} size="xs">
+              Delete
+            </Button>
+          </form>
+        </CardFooter>
+      )}
+    </Card>
   );
 }

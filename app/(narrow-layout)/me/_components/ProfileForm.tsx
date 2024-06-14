@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { createBrowserClient } from '@/utils/supabase/client';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -33,7 +34,7 @@ export default function ProfileForm(props: { user: any }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 bg-white rounded-2xl">
+    <form onSubmit={handleSubmit} className="p-6 rounded-2xl">
       <label className="block mb-4 text-sm ">
         Update your display name
         <input
@@ -44,12 +45,9 @@ export default function ProfileForm(props: { user: any }) {
           onChange={e => setUpdatedDisplayName(e.target.value)}
         />
       </label>
-      <button
-        type="submit"
-        className="w-full py-2 font-semibold text-white bg-green-500 rounded-md hover:bg-green-600"
-      >
+      <Button type="submit" variant={'green'} className="w-full">
         Save
-      </button>
+      </Button>
     </form>
   );
 }
