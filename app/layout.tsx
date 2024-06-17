@@ -2,7 +2,6 @@ import { GeistSans } from 'geist/font/sans';
 import './globals.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
-import { createServerClient } from '@/utils/supabase/server';
 import { ThemeProvider } from '@/src/components/ThemeProvider';
 import { Toaster } from '@/components/ui/sonner';
 
@@ -21,12 +20,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const supabase = createServerClient();
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
   return (
     <html lang="en" className={GeistSans.className} suppressHydrationWarning>
       <body className="flex flex-col items-center min-h-screen">
@@ -37,9 +30,9 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header user={user} />
+          <Header />
           <main className="container flex-1">{children}</main>
-          <Footer user={user} />
+          <Footer />
           <Toaster position="bottom-center" />
         </ThemeProvider>
       </body>

@@ -34,10 +34,10 @@ export default async function InterceptedQuestionPage({
   return (
     // overlay modal
     <Modal>
-      <article className="w-full p-10 bg-white rounded-2xl shadow-lg shadow-slate-600 min-h-[50vh]">
+      <article className="py-12 px-16 bg-muted rounded-2xl">
         <div className="max-w-[60ch] mx-auto">
           <H2>{question.question}</H2>
-          <p>{question.answer}</p>
+          <p className="text-muted-foreground">{question.answer}</p>
         </div>
       </article>
     </Modal>

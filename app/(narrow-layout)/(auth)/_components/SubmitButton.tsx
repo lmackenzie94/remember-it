@@ -5,7 +5,7 @@ import { type ComponentProps } from 'react';
 import { Button } from '@/components/ui/button';
 
 type Props = ComponentProps<'button'> & {
-  pendingText?: string;
+  pendingText: string;
   variant?: 'green' | 'blue';
 };
 
@@ -15,14 +15,19 @@ export function SubmitButton({
   variant,
   ...props
 }: Props) {
-  const { pending, action } = useFormStatus();
-
-  const isPending = pending && action === props.formAction;
+  // const { pending, action } = useFormStatus();
+  const { pending } = useFormStatus();
 
   return (
     // @ts-ignore - TODO: fix this ({...props} is causing an error)
-    <Button variant={variant} type="submit" aria-disabled={pending} {...props}>
-      {isPending ? pendingText : children}
+    <Button
+      variant={variant}
+      type="submit"
+      disabled={pending}
+      aria-disabled={pending}
+      {...props}
+    >
+      {pending ? pendingText : children}
     </Button>
   );
 }

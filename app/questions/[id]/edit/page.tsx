@@ -36,6 +36,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         action={updateQuestion}
         question={question}
         buttonText="Update"
+        pendingText="Updating..."
       />
     </NarrowContainer>
   );

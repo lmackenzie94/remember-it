@@ -1,4 +1,5 @@
 'use server';
+
 import { createServerClient } from '@/utils/supabase/server';
 import { revalidateTag } from 'next/cache';
 
@@ -28,6 +29,8 @@ export async function createQuestion(prevState: any, formData: FormData) {
       message: 'Error creating question'
     };
   }
+
+  revalidateTag('questions');
 
   return {
     error: false,
@@ -78,7 +81,7 @@ export async function updateQuestion(prevState: State, formData: FormData) {
   };
 }
 
-export async function deleteQuestion(questionId: string) {
+export async function deleteQuestion(questionId: number) {
   const supabase = createServerClient();
   const { data, error } = await supabase
     .from('questions')

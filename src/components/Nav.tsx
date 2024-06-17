@@ -1,5 +1,6 @@
 'use client';
 
+import { Profile } from '@/types';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -8,22 +9,25 @@ const NavLinks = [
   { href: '/new-question', label: 'New' }
 ];
 
+const isLetterOrNumber = (char: string) => /[a-zA-Z0-9]/.test(char);
+
 const Avatar = (props: { displayName: string }) => {
   const initials = props.displayName
-    .split(' ')
-    .map(name => name[0].toUpperCase())
-    .join('');
+    ? props.displayName
+        .split(' ')
+        .map(name => (isLetterOrNumber(name[0]) ? name[0].toUpperCase() : null))
+        .join('')
+    : '??';
 
   return (
-    <div className="flex items-center justify-center text-sm font-bold text-accent-foreground bg-accent rounded-full w-9 h-9">
+    <div className="flex items-center justify-center text-sm font-bold text-accent-foreground bg-accent rounded-full w-9 h-9 hover:scale-110 transition-transform">
       {initials}
     </div>
   );
 };
 
-export default function Nav({ user }: { user: any }) {
+export default function Nav({ profile }: { profile: Profile }) {
   const pathname = usePathname();
-  const displayName = user?.user_metadata.display_name;
 
   return (
     <nav className="flex items-center gap-8">
@@ -37,7 +41,7 @@ export default function Nav({ user }: { user: any }) {
         );
       })}
       <Link href="/me">
-        <Avatar displayName={displayName} />
+        <Avatar displayName={profile.display_name} />
       </Link>
     </nav>
   );

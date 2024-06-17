@@ -1,21 +1,34 @@
 import Question from '@/src/components/Question';
 import { H2 } from '@/src/components/typography';
+import { Profile, QuestionWithProfile } from '@/types';
+import { createServerClient } from '@/utils/supabase/server';
 import { getMyQuestions } from '@/utils/supabase/server/queries';
 
 export default async function Page() {
   const questions = await getMyQuestions();
 
+  const supabase = createServerClient();
+  const {
+    data: { user },
+    error
+  } = await supabase.auth.getUser();
+
   return (
     <div>
       <H2>My Questions</H2>
 
-      {!questions || (questions.length === 0 && <p>No questions found.</p>)}
+      {!questions ||
+        (questions.length === 0 && (
+          <p className="text-center">No questions found.</p>
+        ))}
 
       <div className="grid grid-cols-3 gap-8">
-        {questions?.map((question: any) => {
-          return (
-            <Question key={question.id} question={question} canEdit={true} />
-          );
+        {questions?.map(q => {
+          const question: QuestionWithProfile = {
+            ...q,
+            profiles: q.profiles as unknown as Profile
+          };
+          return <Question key={question.id} question={question} user={user} />;
         })}
       </div>
     </div>

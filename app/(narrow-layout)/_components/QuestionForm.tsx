@@ -1,23 +1,23 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 // import { Switch } from '@/src/components/Switch';
 import { useRouter } from 'next/navigation';
 import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
 
-import type { Tables } from '@/supabase.d';
 import type { State } from '@/app/actions';
-
-type Question = Tables<'questions'>;
+import type { Question } from '@/types';
+import { SubmitButton } from '../(auth)/_components/SubmitButton';
 
 export default function Form({
   action,
   buttonText,
+  pendingText,
   question
 }: {
   action: (prevState: State, data: FormData) => Promise<State>;
   buttonText: string;
+  pendingText: string;
   question?: Question;
 }) {
   const router = useRouter();
@@ -28,15 +28,13 @@ export default function Form({
     questionId: question?.id
   });
 
-  console.log('state', state);
-
   if (state.error) {
     toast.error(state.message);
   }
 
   if (!state.error && state.message) {
-    toast.success(state.message);
     router.push('/questions'); // redirect to the questions page
+    toast.success(state.message);
   }
 
   return (
@@ -76,9 +74,13 @@ export default function Form({
       {/* TODO: Switch doesn't work - doesn't get included in the FormData  */}
       {/* <Switch id="private" label="Private?" /> */}
 
-      <Button variant="green" className="w-full mt-6">
+      <SubmitButton
+        variant="green"
+        pendingText={pendingText}
+        className="w-full mt-6"
+      >
         {buttonText}
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

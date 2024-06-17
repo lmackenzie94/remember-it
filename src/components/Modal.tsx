@@ -35,7 +35,7 @@ export default function Modal({ children }: { children: React.ReactNode }) {
   return (
     <div
       ref={overlay}
-      className="fixed top-0 bottom-0 left-0 right-0 z-10 mx-auto opacity-0 animate-fade-in bg-black/70"
+      className="fixed top-0 bottom-0 left-0 right-0 z-10 mx-auto opacity-0 animate-fade-in bg-black/90"
       onClick={onClick}
     >
       <div

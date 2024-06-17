@@ -1,11 +1,13 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { createBrowserClient } from '@/utils/supabase/client';
-import { redirect, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { SubmitButton } from '../../(auth)/_components/SubmitButton';
+import { toast } from 'sonner';
+import { Profile } from '@/types';
 
-export default function ProfileForm(props: { user: any }) {
+export default function ProfileForm({ profile }: { profile: Profile }) {
   const [updatedDisplayName, setUpdatedDisplayName] = useState('');
   const supabase = createBrowserClient();
   const router = useRouter();
@@ -13,21 +15,20 @@ export default function ProfileForm(props: { user: any }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    //* OPTION 1: save username to profiles table
-    // const { error } = await supabase
-    //   .from('profiles')
-    //   .upsert({ id: user.id, username });
-
-    //* OPTION 2: save username to user_metadata
-    const { data, error } = await supabase.auth.updateUser({
-      data: { display_name: updatedDisplayName }
+    const { error } = await supabase.from('profiles').upsert({
+      id: profile.id,
+      display_name: updatedDisplayName,
+      email: profile.email
     });
 
     if (error) {
-      console.error('Error saving username ', error);
+      toast.error(
+        error.code === '23505' ? 'Username already taken' : error.message
+      );
+      return;
     }
 
-    console.log('Success saving username ', data);
+    toast.success('Success saving username');
 
     // refresh the page to see the updated username
     router.refresh();
@@ -36,18 +37,32 @@ export default function ProfileForm(props: { user: any }) {
   return (
     <form onSubmit={handleSubmit} className="p-6 rounded-2xl">
       <label className="block mb-4 text-sm ">
-        Update your display name
+        Display Name
         <input
           type="text"
           className="block w-full px-4 py-2 mt-1 border rounded-md"
           value={updatedDisplayName}
-          placeholder={props.user.user_metadata.display_name}
+          placeholder={profile.display_name}
           onChange={e => setUpdatedDisplayName(e.target.value)}
+          required
         />
       </label>
-      <Button type="submit" variant={'green'} className="w-full">
+
+      {/* email readonly for now */}
+      <label className="block mb-4 text-sm ">
+        Email
+        <input
+          type="text"
+          className="block w-full px-4 py-2 mt-1 border rounded-md"
+          value={profile.email}
+          placeholder={profile.email}
+          readOnly={true}
+          disabled
+        />
+      </label>
+      <SubmitButton variant="green" pendingText="Saving..." className="w-full">
         Save
-      </Button>
+      </SubmitButton>
     </form>
   );
 }

@@ -1,7 +1,8 @@
-import { redirect } from 'next/navigation';
-import { createServerClient } from '@/utils/supabase/server';
 import ProfileForm from './_components/ProfileForm';
 import { H2 } from '@/src/components/typography';
+import { createServerClient } from '@/utils/supabase/server';
+import { getUserProfile } from '@/utils/supabase/server/queries';
+import { redirect } from 'next/navigation';
 
 export default async function Me() {
   const supabase = createServerClient();
@@ -11,10 +12,12 @@ export default async function Me() {
     redirect('/login');
   }
 
+  const profile = await getUserProfile(data.user.id);
+
   return (
     <div>
-      <H2>Update Your Profile</H2>
-      <ProfileForm user={data.user} />
+      <H2>Hey, {profile?.display_name} 👋</H2>
+      <ProfileForm profile={profile} />
     </div>
   );
 }

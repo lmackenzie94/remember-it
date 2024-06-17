@@ -2,27 +2,26 @@
 
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { deleteQuestion } from '@/app/actions';
 import { toast } from 'sonner';
+import type { QuestionWithProfile } from '@/types';
+import { User } from '@supabase/supabase-js';
 
 export default function Question({
   question,
-  canEdit
+  user
 }: {
-  question: any;
-  canEdit: boolean;
+  question: QuestionWithProfile;
+  user: User | null;
 }) {
-  // TODO: how to get the creator of the question? Can't do this because only admins can get user by id
-  // const supabase = createServerClient();
-  // const creator = await supabase.auth.admin.getUserById(question.user_id);
-
-  // const {
-  //   data: { user }
-  // } = await supabase.auth.getUser();
-  // const creatorId = question.user_id;
-
   const handleDelete = async () => {
     const { error, message } = await deleteQuestion(question.id); // call server action
 
@@ -57,28 +56,39 @@ export default function Question({
   //   revalidateTag('questions');
   // };
 
+  const authorIsCurrentUser = user && user.id === question.profiles.id;
+
   return (
-    <Card className="relative">
+    <Card className="relative flex flex-col justify-between gap-y-8 bg-muted/50 pt-2">
       {question.private && (
         <Badge variant="green" className="absolute -top-2 -right-2">
           Private
         </Badge>
       )}
-      <CardHeader className="mb-10 mt-3">
-        <CardTitle>{question.question}</CardTitle>
+      <CardHeader>
+        <CardTitle className="leading-tight">{question.question}</CardTitle>
+        <CardDescription>
+          Asked by{' '}
+          <span className="font-bold">
+            {authorIsCurrentUser ? `You` : question.profiles.display_name}
+          </span>
+        </CardDescription>
       </CardHeader>
 
-      {canEdit && (
+      {authorIsCurrentUser && (
         <CardFooter className="flex items-center justify-end gap-2">
           <Link
             href={`/questions/${question.id}`}
-            className={buttonVariants({ variant: 'secondary', size: 'xs' })}
+            className={`${buttonVariants({
+              variant: 'white',
+              size: 'xs'
+            })} border border-input`}
           >
             View
           </Link>
           <Link
             href={`/questions/${question.id}/edit`}
-            className={buttonVariants({ size: 'xs' })}
+            className={buttonVariants({ variant: 'blue', size: 'xs' })}
           >
             Edit
           </Link>

@@ -1,14 +1,20 @@
-import Link from 'next/link';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { SubmitButton } from '../_components/SubmitButton';
 import { H2 } from '@/src/components/typography';
 
-export default function Login({
+export default async function Login({
   searchParams
 }: {
   searchParams: { message: string };
 }) {
+  // if user is already logged in, redirect to the home page
+  const supabase = createServerClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (data?.user) {
+    return redirect('/');
+  }
+
   const signIn = async (formData: FormData) => {
     'use server';
 
@@ -16,7 +22,7 @@ export default function Login({
     const password = formData.get('password') as string;
     const supabase = createServerClient();
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
@@ -31,7 +37,10 @@ export default function Login({
   return (
     <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 rounded-2xl">
       <H2>Sign In</H2>
-      <form className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in">
+      <form
+        action={signIn}
+        className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in"
+      >
         <label className="text-md" htmlFor="email">
           Email
         </label>
@@ -51,11 +60,7 @@ export default function Login({
           required
         />
 
-        <SubmitButton
-          variant="green"
-          formAction={signIn}
-          pendingText="Signing In..."
-        >
+        <SubmitButton variant="green" pendingText="Signing In...">
           Sign In
         </SubmitButton>
 
