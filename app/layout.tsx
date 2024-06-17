@@ -33,14 +33,14 @@ export default async function RootLayout({
         {/* ThemProvider only works in the body */}
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
           <Header user={user} />
           <main className="container flex-1">{children}</main>
           <Footer user={user} />
-          <Toaster />
+          <Toaster position="bottom-center" />
         </ThemeProvider>
       </body>
     </html>
