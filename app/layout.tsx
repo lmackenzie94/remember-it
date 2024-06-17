@@ -4,6 +4,7 @@ import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import { createServerClient } from '@/utils/supabase/server';
 import { ThemeProvider } from '@/src/components/ThemeProvider';
+import { Toaster } from '@/components/ui/sonner';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -39,6 +40,7 @@ export default async function RootLayout({
           <Header user={user} />
           <main className="container flex-1">{children}</main>
           <Footer user={user} />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

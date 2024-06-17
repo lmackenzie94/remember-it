@@ -4,11 +4,11 @@
 
 import Question from '@/src/components/Question';
 import { createServerClient } from '@/utils/supabase/server';
-// import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 import QuestionForm from '../(narrow-layout)/_components/QuestionForm';
 import { H2 } from '@/src/components/typography';
 import NarrowContainer from '@/src/components/NarrowContainer';
+import { createQuestion } from '../actions';
 
 export default async function Page() {
   const supabase = createServerClient();
@@ -16,40 +16,6 @@ export default async function Page() {
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
     redirect('/login');
-  }
-
-  async function createQuestion(formData: FormData) {
-    'use server'; // Next.js "Server Action"
-
-    // had to recall createServerClient here otherwise it was throwing an error
-    const supabase = createServerClient();
-
-    const {
-      data: { user }
-    } = await supabase.auth.getUser();
-
-    const isPrivate = formData.has('private');
-
-    // insert
-    const { data, error } = await supabase
-      .from('questions')
-      .insert({
-        question: formData.get('question') as string,
-        answer: formData.get('answer') as string,
-        private: isPrivate,
-        user_id: user?.id
-      })
-      .select();
-
-    if (error || !data) {
-      console.error('Error creating question', error);
-      throw new Error(error.details || error.message);
-    }
-
-    console.log('Question created', data);
-
-    // redirect to the question page
-    redirect(`/questions`);
   }
 
   return (

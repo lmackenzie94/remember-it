@@ -1,11 +1,13 @@
-import { createServerClient } from '@/utils/supabase/server';
-import { revalidateTag } from 'next/cache';
+'use client';
+
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button, buttonVariants } from '@/components/ui/button';
+import { deleteQuestion } from '@/app/actions';
+import { toast } from 'sonner';
 
-export default async function Question({
+export default function Question({
   question,
   canEdit
 }: {
@@ -21,27 +23,39 @@ export default async function Question({
   // } = await supabase.auth.getUser();
   // const creatorId = question.user_id;
 
-  const deleteQuestion = async () => {
-    'use server';
+  const handleDelete = async () => {
+    const { error, message } = await deleteQuestion(question.id); // call server action
 
-    // had to recall createServerClient here otherwise it was throwing an error
-    const supabase = createServerClient();
-    const { data, error } = await supabase
-      .from('questions')
-      .delete()
-      .eq('id', question.id)
-      .select();
-
-    if (error || !data) {
-      console.error('Error deleting question', error);
+    if (error) {
+      toast.error(message);
       return;
     }
 
-    console.log('Question deleted', data);
+    console.log('Question deleted...');
 
-    // refreshes the page
-    revalidateTag('questions');
+    toast.success(message);
   };
+
+  // const deleteQuestion = async () => {
+  //   'use server';
+
+  //   const supabase = createServerClient();
+  //   const { data, error } = await supabase
+  //     .from('questions')
+  //     .delete()
+  //     .eq('id', question.id)
+  //     .select();
+
+  //   if (error || !data) {
+  //     console.error('Error deleting question', error);
+  //     return;
+  //   }
+
+  //   console.log('Question deleted', data);
+
+  //   // refreshes the page
+  //   revalidateTag('questions');
+  // };
 
   return (
     <Card className="relative">
@@ -68,11 +82,16 @@ export default async function Question({
           >
             Edit
           </Link>
-          <form>
+          {/* <form>
             <Button variant="destructive" formAction={deleteQuestion} size="xs">
               Delete
             </Button>
-          </form>
+          </form> */}
+
+          {/* TODO: do this without making the whole component a client-side component */}
+          <Button variant="destructive" onClick={handleDelete} size="xs">
+            Delete
+          </Button>
         </CardFooter>
       )}
     </Card>

@@ -1,29 +1,53 @@
-// import MDEditor from '@/src/components/MarkdownEditor';
+'use client';
 
 import { Button } from '@/components/ui/button';
-import { Switch } from '@/src/components/Switch';
+// import { Switch } from '@/src/components/Switch';
+import { useRouter } from 'next/navigation';
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
+import type { Tables } from '@/supabase.d';
+import type { State } from '@/app/actions';
+
+type Question = Tables<'questions'>;
 
 export default function Form({
   action,
   buttonText,
   question
 }: {
-  action: (data: FormData) => Promise<void>;
+  action: (prevState: State, data: FormData) => Promise<State>;
   buttonText: string;
-  question?: {
-    question: string;
-    answer: string;
-    private: boolean;
-  };
+  question?: Question;
 }) {
+  const router = useRouter();
+
+  const [state, formAction] = useFormState(action, {
+    error: false,
+    message: '',
+    questionId: question?.id
+  });
+
+  console.log('state', state);
+
+  if (state.error) {
+    toast.error(state.message);
+  }
+
+  if (!state.error && state.message) {
+    toast.success(state.message);
+    router.push('/questions'); // redirect to the questions page
+  }
+
   return (
-    <form action={action} className="p-6 rounded-2xl">
+    <form action={formAction} className="p-6 rounded-2xl">
       <label className="block mb-4 text-sm ">
         Question
         <input
           name="question"
           defaultValue={question?.question}
           className="block w-full px-4 py-2 mt-1 border rounded-md"
+          required
         />
       </label>
 
@@ -34,11 +58,9 @@ export default function Form({
           rows={6}
           defaultValue={question?.answer}
           className="block w-full px-4 py-2 mt-1 border rounded-md"
+          required
         />
       </label>
-
-      {/* TODO: I think I have to make this a client component to use MDEditor, that way I can save the value to state */}
-      {/* <MDEditor value={''} height="200px" /> */}
 
       {/* TODO: remove this when Switch works */}
       <label className="flex items-center text-sm gap-2">
@@ -54,7 +76,7 @@ export default function Form({
       {/* TODO: Switch doesn't work - doesn't get included in the FormData  */}
       {/* <Switch id="private" label="Private?" /> */}
 
-      <Button variant="green" type="submit" className="w-full mt-6">
+      <Button variant="green" className="w-full mt-6">
         {buttonText}
       </Button>
     </form>
