@@ -17,17 +17,17 @@ export default async function Login({
   }
 
   return (
-    <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 rounded-2xl">
+    <div className="flex flex-col justify-center flex-1 w-full p-6 rounded-2xl">
       <H2>Sign In</H2>
       <form
         action={login}
-        className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in"
+        className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in bg-accent text-accent-foreground p-5 rounded-md"
       >
         <label className="text-md" htmlFor="email">
           Email
         </label>
         <input
-          className="px-4 py-2 mb-6 border rounded-md bg-inherit"
+          className="px-4 py-2 mb-6 border rounded-md bg-white"
           name="email"
           placeholder="you@example.com"
           required
@@ -36,7 +36,7 @@ export default async function Login({
           Password
         </label>
         <input
-          className="px-4 py-2 mb-6 border rounded-md bg-inherit"
+          className="px-4 py-2 mb-6 border rounded-md bg-white"
           type="password"
           name="password"
           required

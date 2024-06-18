@@ -21,15 +21,17 @@ export default async function Header() {
   }
 
   return (
-    <header className="container mb-14">
-      <div className="flex items-center justify-between border-b py-8">
-        <h1 className="font-mono text-2xl tracking-wide font-black">
-          <Link href="/">Remember It</Link>
-        </h1>
+    <header className="bg-accent text-accent-foreground w-full mb-14">
+      <div className="container">
+        <div className="flex items-center justify-between py-8">
+          <h1 className="font-mono text-2xl tracking-wide font-black">
+            <Link href="/">Remember It</Link>
+          </h1>
 
-        <div className="flex gap-x-5">
-          {navToShow}
-          <ThemeToggle />
+          <div className="flex gap-x-2">
+            {navToShow}
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </header>

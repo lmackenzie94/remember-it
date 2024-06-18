@@ -20,7 +20,7 @@ const Avatar = (props: { displayName: string }) => {
     : '??';
 
   return (
-    <div className="flex items-center justify-center text-sm font-bold text-accent-foreground bg-accent rounded-full w-9 h-9 hover:scale-110 transition-transform">
+    <div className="flex items-center justify-center text-sm font-bold text-accent bg-accent-foreground rounded-full w-9 h-9 hover:scale-110 transition-transform">
       {initials}
     </div>
   );
