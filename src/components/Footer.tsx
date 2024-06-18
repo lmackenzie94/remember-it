@@ -1,6 +1,6 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/src/components/ui/button';
 import { createServerClient } from '@/utils/supabase/server';
-import { signOut } from '@/utils/supabase/server/queries';
+import { signOut } from '@/utils/supabase/queries';
 
 export default async function Footer() {
   const handleSignOut = async () => {

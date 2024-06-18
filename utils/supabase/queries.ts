@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { createServerClient } from '../server';
+import { createServerClient } from './server';
 
 export const getUserProfile = async (userId: string) => {
   const supabase = createServerClient();

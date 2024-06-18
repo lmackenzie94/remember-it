@@ -2,7 +2,7 @@ import Question from '@/src/components/Question';
 import { H2 } from '@/src/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
 import { createServerClient } from '@/utils/supabase/server';
-import { getMyQuestions } from '@/utils/supabase/server/queries';
+import { getMyQuestions } from '@/utils/supabase/queries';
 
 export default async function Page() {
   const questions = await getMyQuestions();

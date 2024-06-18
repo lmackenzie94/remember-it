@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Nav from './Nav';
 import AuthNav from './AuthNav';
 import { ThemeToggle } from './ThemeToggle';
-import { getUserProfile } from '@/utils/supabase/server/queries';
+import { getUserProfile } from '@/utils/supabase/queries';
 import { createServerClient } from '@/utils/supabase/server';
 
 export default async function Header() {

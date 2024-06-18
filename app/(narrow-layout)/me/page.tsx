@@ -1,7 +1,7 @@
 import ProfileForm from './_components/ProfileForm';
 import { H2 } from '@/src/components/typography';
 import { createServerClient } from '@/utils/supabase/server';
-import { getUserProfile } from '@/utils/supabase/server/queries';
+import { getUserProfile } from '@/utils/supabase/queries';
 import { redirect } from 'next/navigation';
 
 export default async function Me() {

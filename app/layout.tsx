@@ -3,7 +3,7 @@ import './globals.css';
 import Header from '@/src/components/Header';
 import Footer from '@/src/components/Footer';
 import { ThemeProvider } from '@/src/components/ThemeProvider';
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from '@/src/components/ui/sonner';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
