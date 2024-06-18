@@ -1,7 +1,7 @@
 'use client';
 
-import { Label } from '@/src/components/ui/label';
-import { Switch as ShadCNSwitch } from '@/src/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Switch as ShadCNSwitch } from '@/components/ui/switch';
 
 export function Switch({ id, label }: { id: string; label: string }) {
   return (

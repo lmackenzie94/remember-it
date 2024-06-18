@@ -1,5 +1,5 @@
-import Question from '@/src/components/Question';
-import { H2 } from '@/src/components/typography';
+import Question from '@/components/Question';
+import { H2 } from '@/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
 import { createServerClient } from '@/utils/supabase/server';
 import { getMyQuestions } from '@/utils/supabase/queries';

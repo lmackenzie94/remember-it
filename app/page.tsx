@@ -1,7 +1,7 @@
-import Footer from '@/src/components/Footer';
+import Footer from '@/components/Footer';
 import { createServerClient } from '@/utils/supabase/server';
-import Question from '@/src/components/Question';
-import { H2 } from '@/src/components/typography';
+import Question from '@/components/Question';
+import { H2 } from '@/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
 
 export default async function Index() {

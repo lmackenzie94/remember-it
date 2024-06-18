@@ -1,5 +1,5 @@
-import Question from '@/src/components/Question';
-import { H2 } from '@/src/components/typography';
+import Question from '@/components/Question';
+import { H2 } from '@/components/typography';
 import { createServerClient } from '@/utils/supabase/server';
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';

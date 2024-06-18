@@ -1,7 +1,7 @@
 //! This is a "parallel intercepting route" (see here for explanation: https://www.youtube.com/watch?v=mVOvx9eVHg0&list=PLC3y8-rFHvwjOKd6gdf4QtV1uYNiQnruI&index=32)
 
-import Modal from '@/src/components/Modal';
-import { H2 } from '@/src/components/typography';
+import Modal from '@/components/Modal';
+import { H2 } from '@/components/typography';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 

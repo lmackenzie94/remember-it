@@ -1,9 +1,9 @@
 import { GeistSans } from 'geist/font/sans';
 import './globals.css';
-import Header from '@/src/components/Header';
-import Footer from '@/src/components/Footer';
-import { ThemeProvider } from '@/src/components/ThemeProvider';
-import { Toaster } from '@/src/components/ui/sonner';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { Toaster } from '@/components/ui/sonner';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

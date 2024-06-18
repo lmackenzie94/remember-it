@@ -1,4 +1,4 @@
-import NarrowContainer from '@/src/components/NarrowContainer';
+import NarrowContainer from '@/components/NarrowContainer';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return <NarrowContainer>{children}</NarrowContainer>;

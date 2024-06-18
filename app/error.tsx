@@ -1,6 +1,6 @@
 'use client';
 
-import { H2 } from '@/src/components/typography';
+import { H2 } from '@/components/typography';
 
 export default function Error({ error }: { error: Error }) {
   console.error(error);

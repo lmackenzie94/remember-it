@@ -8,7 +8,9 @@ import { toast } from 'sonner';
 import { Profile } from '@/types';
 
 export default function ProfileForm({ profile }: { profile: Profile }) {
-  const [updatedDisplayName, setUpdatedDisplayName] = useState('');
+  const [updatedDisplayName, setUpdatedDisplayName] = useState(
+    profile.display_name
+  );
   const supabase = createBrowserClient();
   const router = useRouter();
 
@@ -42,8 +44,8 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
           type="text"
           className="block w-full px-4 py-2 mt-1 border rounded-md"
           value={updatedDisplayName}
-          placeholder={profile.display_name}
           onChange={e => setUpdatedDisplayName(e.target.value)}
+          placeholder="Enter your display name"
           required
         />
       </label>
@@ -55,7 +57,6 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
           type="text"
           className="block w-full px-4 py-2 mt-1 border rounded-md"
           value={profile.email}
-          placeholder={profile.email}
           readOnly={true}
           disabled
         />

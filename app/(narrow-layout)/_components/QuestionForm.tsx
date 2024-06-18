@@ -1,6 +1,6 @@
 'use client';
 
-// import { Switch } from '@/src/components/Switch';
+// import { Switch } from '@/components/Switch';
 import { useRouter } from 'next/navigation';
 import { useFormState } from 'react-dom';
 import { toast } from 'sonner';
@@ -61,7 +61,7 @@ export default function Form({
       </label>
 
       {/* TODO: remove this when Switch works */}
-      <label className="flex items-center text-sm gap-2">
+      <label className="flex items-center gap-2 text-sm">
         Private?
         <input
           type="checkbox"

@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { SubmitButton } from '../_components/SubmitButton';
-import { H2 } from '@/src/components/typography';
+import { H2 } from '@/components/typography';
 
 export default async function SignUp({
   searchParams

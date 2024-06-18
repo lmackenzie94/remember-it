@@ -1,15 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { Badge } from '@/src/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle
-} from '@/src/components/ui/card';
-import { Button, buttonVariants } from '@/src/components/ui/button';
+} from '@/components/ui/card';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { deleteQuestion } from '@/app/actions';
 import { toast } from 'sonner';
 import type { QuestionWithProfile } from '@/types';

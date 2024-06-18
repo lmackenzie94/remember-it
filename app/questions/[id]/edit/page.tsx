@@ -1,9 +1,9 @@
-import Question from '@/src/components/Question';
+import Question from '@/components/Question';
 import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import QuestionForm from '../../../(narrow-layout)/_components/QuestionForm';
-import { H2 } from '@/src/components/typography';
-import NarrowContainer from '@/src/components/NarrowContainer';
+import { H2 } from '@/components/typography';
+import NarrowContainer from '@/components/NarrowContainer';
 import { updateQuestion } from '@/app/actions';
 
 export default async function Page({ params }: { params: { id: string } }) {

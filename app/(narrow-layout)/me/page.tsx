@@ -1,5 +1,5 @@
 import ProfileForm from './_components/ProfileForm';
-import { H2 } from '@/src/components/typography';
+import { H2 } from '@/components/typography';
 import { createServerClient } from '@/utils/supabase/server';
 import { getUserProfile } from '@/utils/supabase/queries';
 import { redirect } from 'next/navigation';
