@@ -1,13 +1,8 @@
+import { signOut } from '@/app/actions';
 import { Button } from '@/components/ui/button';
 import { createServerClient } from '@/utils/supabase/server';
-import { signOut } from '@/utils/supabase/queries';
 
 export default async function Footer() {
-  const handleSignOut = async () => {
-    'use server';
-    await signOut();
-  };
-
   const supabase = createServerClient();
 
   const {
@@ -18,7 +13,7 @@ export default async function Footer() {
     <footer className="w-full p-4 text-center">
       <div className="container flex items-center justify-end">
         {user && (
-          <form action={handleSignOut}>
+          <form action={signOut}>
             <Button variant="secondary">Logout</Button>
           </form>
         )}

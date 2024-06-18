@@ -36,9 +36,3 @@ export const getMyQuestions = async () => {
 
   return questions;
 };
-
-export const signOut = async () => {
-  const supabase = createServerClient();
-  await supabase.auth.signOut();
-  return redirect('/');
-};

@@ -2,6 +2,7 @@ import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { SubmitButton } from '../_components/SubmitButton';
 import { H2 } from '@/components/typography';
+import { login } from '@/app/actions';
 
 export default async function Login({
   searchParams
@@ -15,30 +16,11 @@ export default async function Login({
     return redirect('/');
   }
 
-  const signIn = async (formData: FormData) => {
-    'use server';
-
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const supabase = createServerClient();
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    });
-
-    if (error) {
-      return redirect('/login?message=Could not authenticate user');
-    }
-
-    return redirect('/');
-  };
-
   return (
     <div className="flex flex-col justify-center flex-1 w-full gap-2 p-6 rounded-2xl">
       <H2>Sign In</H2>
       <form
-        action={signIn}
+        action={login}
         className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in"
       >
         <label className="text-md" htmlFor="email">
