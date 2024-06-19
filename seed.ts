@@ -16,7 +16,6 @@ const main = async () => {
   );
 
   // Clears all existing data in the database, but keep the structure
-  // @ts-ignore
   await seed.$resetDatabase();
 
   // const PASSWORD = 'testuser';
