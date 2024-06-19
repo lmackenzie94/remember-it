@@ -10,7 +10,7 @@ export const login = async (formData: FormData) => {
   const password = formData.get('password') as string;
   const supabase = createServerClient();
 
-  const { data, error } = await supabase.auth.signInWithPassword({
+  const { error } = await supabase.auth.signInWithPassword({
     email,
     password
   });
@@ -41,7 +41,7 @@ export const signUp = async (formData: FormData) => {
     );
   }
 
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {

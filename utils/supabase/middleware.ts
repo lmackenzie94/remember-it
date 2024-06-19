@@ -9,6 +9,8 @@ export const updateSession = async (request: NextRequest) => {
     }
   });
 
+  // ? Can't use our `createServerClient` from utils/supabase/server.ts here because that cookies object is specific to App router (i.e. uses the cookies() helper) and doesn't work in middleware.
+  // ? The cookies object here uses request and response
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
