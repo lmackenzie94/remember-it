@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { createServerClient } from './server';
-import { AuthError, User } from '@supabase/supabase-js';
+import { User } from '@supabase/supabase-js';
 
 // ? RE: calling createServerClient() in every function (from Supabase docs)
 // On the server, it basically configures a fetch call. You need to reconfigure the fetch call anew for every request to your server, because you need the cookies from the request.
