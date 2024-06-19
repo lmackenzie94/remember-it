@@ -36,8 +36,7 @@ https://remember-it-beta.vercel.app/
 
 **THIS IS ONLY KINDA WORKING....**
 
-- seemed to work after first manually creating a new user (via Sign Up form on the site)
-- also had to remove `{dryRun: true}` from createSeedClient();
+- had to remove `{dryRun: true}` from createSeedClient() because we want to execute the seeding, not copy to SQL statements to `seed.sql`
 - also, this way the `seed.sql` file isn't actually being used which maybe isn't ideal?
 - to seed, run `npx tsx seed.ts`
 
@@ -49,4 +48,4 @@ https://remember-it-beta.vercel.app/
    in sync with your new database structure. You can do this by running `npx @snaplet/seed sync`.
 4. (Optional) Customize your AI-generated data using our Data Generator: https://app.snaplet.dev/o/clxm8g5ksibgelyr8rm93waqu/p/clxm8g5ksibgflyr8uqwietfc/seed
 5. Running `npx tsx seed.ts > supabase/seed.sql` generates the relevant SQL statements inside your `supabase/seed.sql` file.
-   - The `seed.sql` file is run every time you run ``supabase start` or `supabase db reset`
+   - The `seed.sql` file is run every time you run `supabase start` or `supabase db reset`

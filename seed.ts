@@ -2,7 +2,7 @@
  * Use any TypeScript runner to run this script, for example: `npx tsx seed.ts`
  * Learn more about the Seed Client by following our guide: https://docs.snaplet.dev/seed/getting-started
  */
-import { createSeedClient, profilesScalars } from '@snaplet/seed';
+import { createSeedClient, type profilesScalars } from '@snaplet/seed';
 import { createClient } from '@supabase/supabase-js';
 import { Database } from './supabase';
 // import { copycat } from '@snaplet/copycat';
