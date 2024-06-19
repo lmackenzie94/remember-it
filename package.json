@@ -5,6 +5,7 @@
     "build": "next build",
     "start": "next start",
     "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
     "supabase:reset-db": "supabase db reset",
     "db:gen-types": "supabase gen types typescript --project-id 'nohpbrvyisemxhxywhca' --schema public > ./supabase.d.ts"
   },
