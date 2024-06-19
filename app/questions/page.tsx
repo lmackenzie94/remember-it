@@ -2,16 +2,17 @@ import Question from '@/components/Question';
 import { H2 } from '@/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
 import { createServerClient } from '@/utils/supabase/server';
-import { getMyQuestions } from '@/utils/supabase/queries';
+import { checkUserAuth, getMyQuestions } from '@/utils/supabase/queries';
 
 export default async function Page() {
+  const { user } = await checkUserAuth();
   const questions = await getMyQuestions();
 
-  const supabase = createServerClient();
-  const {
-    data: { user },
-    error
-  } = await supabase.auth.getUser();
+  // const supabase = createServerClient();
+  // const {
+  //   data: { user },
+  //   error
+  // } = await supabase.auth.getUser();
 
   return (
     <div>

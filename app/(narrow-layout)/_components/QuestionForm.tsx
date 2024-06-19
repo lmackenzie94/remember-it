@@ -22,6 +22,7 @@ export default function Form({
 }) {
   const router = useRouter();
 
+  //* useFormState() has since been renamed to useActionState() in React 19 but Next.js doesn't support it yet
   const [state, formAction] = useFormState(action, {
     error: false,
     message: '',

@@ -1,18 +1,10 @@
 import ProfileForm from './_components/ProfileForm';
 import { H2 } from '@/components/typography';
-import { createServerClient } from '@/utils/supabase/server';
-import { getUserProfile } from '@/utils/supabase/queries';
-import { redirect } from 'next/navigation';
+import { checkUserAuth, getUserProfile } from '@/utils/supabase/queries';
 
 export default async function Me() {
-  const supabase = createServerClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect('/login');
-  }
-
-  const profile = await getUserProfile(data.user.id);
+  const { user } = await checkUserAuth();
+  const profile = await getUserProfile(user.id);
 
   return (
     <div>

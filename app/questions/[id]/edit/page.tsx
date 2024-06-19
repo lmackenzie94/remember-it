@@ -1,30 +1,24 @@
-import Question from '@/components/Question';
-import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import QuestionForm from '../../../(narrow-layout)/_components/QuestionForm';
 import { H2 } from '@/components/typography';
 import NarrowContainer from '@/components/NarrowContainer';
 import { updateQuestion } from '@/app/actions';
+import { checkUserAuth } from '@/utils/supabase/queries';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const supabase = createServerClient();
-
-  const { data, error } = await supabase.auth.getUser();
-  if (error || !data?.user) {
-    redirect('/login');
-  }
+  const { user, supabase } = await checkUserAuth();
 
   // get question by id and user_id
-  const { data: question, error: questionError } = await supabase
+  const { data, error } = await supabase
     .from('questions')
     .select()
     .eq('id', params.id)
-    .eq('user_id', data.user.id)
+    .eq('user_id', user.id)
     .single();
 
-  if (questionError) {
+  if (error) {
     // users shouldn't be able to go to the edit page of a question that 1) doesn't exist or 2) they don't own
-    console.error('Error getting question', questionError);
+    console.error('Error getting question', error);
     redirect('/questions');
   }
 
@@ -34,7 +28,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
       <QuestionForm
         action={updateQuestion}
-        question={question}
+        question={data}
         buttonText="Update"
         pendingText="Updating..."
       />
