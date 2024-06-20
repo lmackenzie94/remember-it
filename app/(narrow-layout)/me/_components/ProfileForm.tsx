@@ -37,12 +37,15 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 rounded-2xl">
-      <label className="block mb-4 text-sm ">
+    <form
+      onSubmit={handleSubmit}
+      className="animate-fade-up-in p-5 rounded-md bg-green/10 dark:bg-green/30"
+    >
+      <label className="block mb-4 text-sm font-semibold">
         Display Name
         <input
           type="text"
-          className="block w-full px-4 py-2 mt-1 border rounded-md"
+          className="block w-full px-4 py-2 mt-1 border rounded-md bg-white text-black font-normal"
           value={updatedDisplayName}
           onChange={e => setUpdatedDisplayName(e.target.value)}
           placeholder="Enter your display name"
@@ -51,11 +54,11 @@ export default function ProfileForm({ profile }: { profile: Profile }) {
       </label>
 
       {/* email readonly for now */}
-      <label className="block mb-4 text-sm ">
+      <label className="block mb-4 text-sm font-semibold">
         Email
         <input
           type="text"
-          className="block w-full px-4 py-2 mt-1 border rounded-md"
+          className="block w-full px-4 py-2 mt-1 border rounded-md bg-white text-black font-normal"
           value={profile.email}
           readOnly={true}
           disabled

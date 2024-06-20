@@ -1,18 +1,11 @@
 import Question from '@/components/Question';
 import { H2 } from '@/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
-import { createServerClient } from '@/utils/supabase/server';
 import { checkUserAuth, getMyQuestions } from '@/utils/supabase/queries';
 
 export default async function Page() {
   const { user } = await checkUserAuth();
   const questions = await getMyQuestions();
-
-  // const supabase = createServerClient();
-  // const {
-  //   data: { user },
-  //   error
-  // } = await supabase.auth.getUser();
 
   return (
     <div>
@@ -23,7 +16,7 @@ export default async function Page() {
           <p className="text-center">No questions found.</p>
         ))}
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {questions?.map(q => {
           const question: QuestionWithProfile = {
             ...q,

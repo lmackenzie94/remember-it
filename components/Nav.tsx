@@ -9,28 +9,11 @@ const NavLinks = [
   { href: '/new-question', label: 'New' }
 ];
 
-const isLetterOrNumber = (char: string) => /[a-zA-Z0-9]/.test(char);
-
-const Avatar = (props: { displayName: string }) => {
-  const initials = props.displayName
-    ? props.displayName
-        .split(' ')
-        .map(name => (isLetterOrNumber(name[0]) ? name[0].toUpperCase() : null))
-        .join('')
-    : '??';
-
-  return (
-    <div className="flex items-center justify-center text-sm font-bold text-accent bg-accent-foreground rounded-full w-9 h-9 hover:scale-110 transition-transform">
-      {initials}
-    </div>
-  );
-};
-
-export default function Nav({ profile }: { profile: Profile }) {
+export default function Nav() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center gap-8">
+    <nav className="flex items-center justify-between gap-10">
       {NavLinks.map(({ href, label }) => {
         const isActive = pathname === href;
 
@@ -40,9 +23,6 @@ export default function Nav({ profile }: { profile: Profile }) {
           </Link>
         );
       })}
-      <Link href="/me">
-        <Avatar displayName={profile.display_name} />
-      </Link>
     </nav>
   );
 }

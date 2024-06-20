@@ -10,7 +10,7 @@ export default async function Footer() {
   } = await supabase.auth.getUser();
 
   return (
-    <footer className="w-full p-4 text-center">
+    <footer className="w-full p-4 text-center mt-4">
       <div className="container flex items-center justify-end">
         {user && (
           <form action={signOut}>

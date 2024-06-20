@@ -36,7 +36,7 @@ export default async function Index() {
     <>
       <H2>Question Feed</H2>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {questions?.map(q => {
           const question: QuestionWithProfile = {
             ...q,
