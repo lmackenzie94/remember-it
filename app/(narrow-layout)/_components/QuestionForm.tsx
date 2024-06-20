@@ -7,7 +7,7 @@ import { toast } from 'sonner';
 
 import type { State } from '@/app/actions';
 import type { Question } from '@/types';
-import { SubmitButton } from '../(auth)/_components/SubmitButton';
+import { SubmitButton } from '../../auth/_components/SubmitButton';
 
 type CreateFormProps = {
   type: 'create';

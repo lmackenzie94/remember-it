@@ -45,7 +45,7 @@ export const checkUserAuth = async (): Promise<{
 
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect('/login');
+    redirect('/auth');
   }
 
   return { supabase, user: data.user };

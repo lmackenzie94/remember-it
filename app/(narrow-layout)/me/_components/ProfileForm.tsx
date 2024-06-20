@@ -3,7 +3,7 @@
 import { createBrowserClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { SubmitButton } from '../../(auth)/_components/SubmitButton';
+import { SubmitButton } from '../../../auth/_components/SubmitButton';
 import { toast } from 'sonner';
 import { Profile } from '@/types';
 

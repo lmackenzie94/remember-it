@@ -16,7 +16,7 @@ export const login = async (formData: FormData) => {
   });
 
   if (error) {
-    return redirect('/login?message=Could not authenticate user');
+    return redirect('/auth?message=Could not authenticate user');
   }
 
   return redirect('/');
@@ -37,7 +37,7 @@ export const signUp = async (formData: FormData) => {
 
   if (profile && profile.length > 0) {
     return redirect(
-      '/signup?message=A user with that display name already exists'
+      '/auth?message=A user with that display name already exists'
     );
   }
 
@@ -60,20 +60,20 @@ export const signUp = async (formData: FormData) => {
   //   data.user.identities &&
   //   data.user.identities.length === 0
   // ) {
-  //   return redirect('/signup?message=A user with that email already exists');
+  //   return redirect('/auth?message=A user with that email already exists');
   // }
 
   if (error) {
     console.log('ERROR', error.message, error.code);
     // ! NOTE: you disabled "Confirm phone" so that error message would be returned when trying to sign up with an existing email
     if (error.code === 'user_already_exists') {
-      return redirect('/signup?message=A user with that email already exists');
+      return redirect('/auth?message=A user with that email already exists');
     }
 
-    return redirect('/signup?message=Could not authenticate user');
+    return redirect('/auth?message=Could not authenticate user');
   }
 
-  return redirect('/login?message=Check email to continue sign in process');
+  return redirect('/auth?message=Check email to continue sign in process');
 };
 
 export const signOut = async () => {
