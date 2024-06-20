@@ -14,11 +14,7 @@ export default async function Page() {
   return (
     <NarrowContainer>
       <H2>New Question</H2>
-      <QuestionForm
-        action={createQuestion}
-        buttonText="Create"
-        pendingText="Creating..."
-      />
+      <QuestionForm type="create" action={createQuestion} />
     </NarrowContainer>
   );
 }

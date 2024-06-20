@@ -26,12 +26,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     <NarrowContainer>
       <H2>Update Question</H2>
 
-      <QuestionForm
-        action={updateQuestion}
-        question={data}
-        buttonText="Update"
-        pendingText="Updating..."
-      />
+      <QuestionForm type="update" action={updateQuestion} question={data} />
     </NarrowContainer>
   );
 }

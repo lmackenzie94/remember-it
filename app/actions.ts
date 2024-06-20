@@ -120,19 +120,12 @@ export async function createQuestion(prevState: any, formData: FormData) {
 export type State = {
   error: boolean;
   message: string;
-  questionId?: number;
 };
 
 export async function updateQuestion(prevState: State, formData: FormData) {
   const supabase = createServerClient();
   const isPrivate = formData.has('private');
-
-  if (!prevState.questionId) {
-    return {
-      error: true,
-      message: 'Question ID is required'
-    };
-  }
+  const questionId = formData.get('id') as string;
 
   const { data, error } = await supabase
     .from('questions')
@@ -141,7 +134,7 @@ export async function updateQuestion(prevState: State, formData: FormData) {
       answer: formData.get('answer') as string,
       private: isPrivate
     })
-    .eq('id', prevState.questionId)
+    .eq('id', questionId)
     .select();
 
   if (error || !data) {
@@ -152,7 +145,7 @@ export async function updateQuestion(prevState: State, formData: FormData) {
     };
   }
 
-  revalidateTag(`questions/${prevState.questionId}`);
+  revalidateTag(`questions/${questionId}`);
 
   return {
     error: false,

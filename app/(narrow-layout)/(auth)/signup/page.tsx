@@ -18,36 +18,36 @@ export default async function SignUp({
   }
 
   return (
-    <div className="flex flex-col justify-center flex-1 w-full p-6 rounded-2xl">
+    <>
       <H2>Sign Up</H2>
 
       <form
         action={signUp}
-        className="flex flex-col justify-center flex-1 w-full gap-2 animate-fade-up-in bg-accent text-accent-foreground p-5 rounded-md"
+        className="flex flex-col gap-1 animate-fade-up-in bg-blue/10 dark:bg-blue/30 p-5 rounded-md max-w-lg mx-auto"
       >
-        <label className="text-md" htmlFor="email">
+        <label className="text-sm" htmlFor="email">
           Email
         </label>
         <input
-          className="px-4 py-2 mb-6 border rounded-md bg-white"
+          className="px-4 py-2 mb-6 border rounded-md bg-white text-black"
           name="email"
           placeholder="you@example.com"
           required
         />
-        <label className="text-md" htmlFor="password">
+        <label className="text-sm" htmlFor="password">
           Password
         </label>
         <input
-          className="px-4 py-2 mb-6 border rounded-md bg-white"
+          className="px-4 py-2 mb-6 border rounded-md bg-white text-black"
           type="password"
           name="password"
           required
         />
-        <label className="text-md" htmlFor="display_name">
+        <label className="text-sm" htmlFor="display_name">
           Display Name
         </label>
         <input
-          className="px-4 py-2 mb-6 border rounded-md bg-white"
+          className="px-4 py-2 mb-6 border rounded-md bg-white text-black"
           name="display_name"
           placeholder="Jane Doe, jdoe94, etc."
           required
@@ -62,6 +62,6 @@ export default async function SignUp({
           </p>
         )}
       </form>
-    </div>
+    </>
   );
 }

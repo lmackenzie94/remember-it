@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer';
 import { createServerClient } from '@/utils/supabase/server';
 import Question from '@/components/Question';
 import { H2 } from '@/components/typography';
@@ -22,6 +21,8 @@ export default async function Index() {
   } else {
     baseQuery.eq('private', false);
   }
+
+  // TODO: fix error when using local Supabase - JWSError (CompactDecodeError Invalid number of parts: Expected 3 parts; got 5)
 
   const { data: questions, error: questionsError } = await baseQuery
     .order('created_at', { ascending: false })
