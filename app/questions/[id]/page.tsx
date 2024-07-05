@@ -1,21 +1,26 @@
-import Question from '@/components/Question';
 import { H2 } from '@/components/typography';
 import { checkUserAuth } from '@/utils/supabase/queries';
+import { createServerClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { supabase } = await checkUserAuth();
+  const supabase = createServerClient();
 
   // get question by id
+  //? users can't view other user's private questions b/c of RLS policy in Supabase
   const { data, error } = await supabase
     .from('questions')
     .select()
     .eq('id', params.id)
     .single();
 
-  if (error) {
+  if (!data || error) {
     console.error('Error getting question', error);
     redirect('/questions');
+  }
+
+  if (data.private) {
+    await checkUserAuth();
   }
 
   return (
