@@ -2,6 +2,7 @@ import Question from '@/components/Question';
 import { H2 } from '@/components/typography';
 import { Profile, QuestionWithProfile } from '@/types';
 import { checkUserAuth, getMyQuestions } from '@/utils/supabase/queries';
+import Link from 'next/link';
 
 export default async function Page() {
   const { user } = await checkUserAuth();
@@ -13,7 +14,14 @@ export default async function Page() {
 
       {!questions ||
         (questions.length === 0 && (
-          <p className="text-center">No questions found.</p>
+          <p className="text-center">
+            Looks like you haven&apos;t created any questions yet &mdash; go
+            ahead and{' '}
+            <Link href="/new-question" className="font-bold underline">
+              add one
+            </Link>
+            !
+          </p>
         ))}
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">

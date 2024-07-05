@@ -30,7 +30,7 @@ export default async function Header() {
             <Link href="/">Remember It</Link>
           </h1>
 
-          <div className="flex justify-between sm:justify-end w-full sm:w-auto">
+          <div className="flex justify-between sm:justify-end w-full sm:w-auto gap-x-2">
             {navToShow}
             <div className="flex gap-x-2">
               {user && userDisplayName && (

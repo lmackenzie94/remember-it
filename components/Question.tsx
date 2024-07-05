@@ -75,35 +75,37 @@ export default function Question({
         </CardDescription>
       </CardHeader>
 
-      {authorIsCurrentUser && (
-        <CardFooter className="flex items-center justify-end gap-2">
-          <Link
-            href={`/questions/${question.id}`}
-            className={`${buttonVariants({
-              variant: 'white',
-              size: 'xs'
-            })} border border-input`}
-          >
-            View
-          </Link>
-          <Link
-            href={`/questions/${question.id}/edit`}
-            className={buttonVariants({ variant: 'blue', size: 'xs' })}
-          >
-            Edit
-          </Link>
-          {/* <form>
+      <CardFooter className="flex items-center justify-end gap-2">
+        <Link
+          href={`/questions/${question.id}`}
+          className={`${buttonVariants({
+            variant: 'white',
+            size: 'xs'
+          })} border border-input`}
+        >
+          View
+        </Link>
+        {authorIsCurrentUser && (
+          <>
+            <Link
+              href={`/questions/${question.id}/edit`}
+              className={buttonVariants({ variant: 'blue', size: 'xs' })}
+            >
+              Edit
+            </Link>
+            {/* <form>
             <Button variant="destructive" formAction={deleteQuestion} size="xs">
               Delete
             </Button>
           </form> */}
 
-          {/* TODO: do this without making the whole component a client-side component */}
-          <Button variant="destructive" onClick={handleDelete} size="xs">
-            Delete
-          </Button>
-        </CardFooter>
-      )}
+            {/* TODO: do this without making the whole component a client-side component */}
+            <Button variant="destructive" onClick={handleDelete} size="xs">
+              Delete
+            </Button>
+          </>
+        )}
+      </CardFooter>
     </Card>
   );
 }
